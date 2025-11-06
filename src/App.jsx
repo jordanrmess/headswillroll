@@ -57,7 +57,7 @@ const App = () => {
       <img
         src={imageSrc}
         alt="Direction"
-        className="w-16 h-16 object-contain"
+        className="w-36 h-36 object-contain"
       />   
        <button onClick={() => setGlassesMode(!glassesMode)}
         className="absolute bottom-4 px-4 py-2 text-black focus:outline-none">
