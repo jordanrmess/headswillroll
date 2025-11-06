@@ -61,7 +61,7 @@ const App = () => {
       />   
        <button onClick={() => setGlassesMode(!glassesMode)}
         className="absolute bottom-4 px-4 py-2 text-black focus:outline-none">
-       glasses mode {glassesMode ? 'off' : 'on'}
+       toggle glasses mode {glassesMode ? 'off' : 'on'}
 
       </button>
        </div>
