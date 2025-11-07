@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const App = () => {
-  const [imageSrc, setImageSrc] = useState('heads/c.png');
+  const [imageSrc, setImageSrc] = useState("glasses_mode/c.png");
   const [timeoutId, setTimeoutId] = useState(null);
-  const [glassesMode, setGlassesMode] = useState(false); 
-
+  const [glassesMode, setGlassesMode] = useState(true);
+  const [lightSwitch, flipLightSwitch] = useState(true);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -18,8 +18,7 @@ const App = () => {
       const deltaY = event.clientY - viewportCenterY;
       const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
-      const folder = glassesMode ? 'glasses_mode' : 'heads';
-
+      const folder = glassesMode ? "glasses_mode" : "heads";
 
       if (angle >= -22.5 && angle < 22.5) {
         setImageSrc(`${folder}/cr.png`);
@@ -29,7 +28,10 @@ const App = () => {
         setImageSrc(`${folder}/dc.png`);
       } else if (angle >= 112.5 && angle < 157.5) {
         setImageSrc(`${folder}/dl.png`);
-      } else if ((angle >= 157.5 && angle <= 180) || (angle >= -180 && angle < -157.5)) {
+      } else if (
+        (angle >= 157.5 && angle <= 180) ||
+        (angle >= -180 && angle < -157.5)
+      ) {
         setImageSrc(`${folder}/cl.png`);
       } else if (angle >= -157.5 && angle < -112.5) {
         setImageSrc(`${folder}/ul.png`);
@@ -45,26 +47,46 @@ const App = () => {
       setTimeoutId(id);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [glassesMode,timeoutId]);
+  }, [glassesMode, timeoutId]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <img
-        src={imageSrc}
-        alt="Direction"
-        className="w-36 h-36 object-contain"
-      />   
-       <button onClick={() => setGlassesMode(!glassesMode)}
-        className="absolute bottom-4 px-4 py-2 text-black focus:outline-none">
-       toggle glasses mode {glassesMode ? 'off' : 'on'}
-
-      </button>
-       </div>
+    <div
+      className={`relative h-screen w-screen ${
+        lightSwitch ? "bg-white" : "bg-black"
+      }`}
+    >
+      <div className="flex justify-center items-center h-full">
+        <img
+          src={imageSrc}
+          alt="Direction"
+          className={`w-36 h-36 object-contain ${
+            lightSwitch ? "" : "invisible"
+          }`}
+        />
+        <button
+          onClick={() => setGlassesMode(!glassesMode)}
+          className="absolute bottom-4 px-4 py-2 text-black focus:outline-none"
+        >
+          toggle glasses {glassesMode ? "off" : "on"}
+        </button>
+      </div>
+      <div className="absolute top-0 left-0 p-8">
+        <img
+          src={
+            lightSwitch
+              ? "/switches/on _switch_transparent.png"
+              : "switches/off_switch_transparent.png"
+          }
+          className="w-24 h-24 cursor-pointer"
+          onClick={() => flipLightSwitch(!lightSwitch)}
+        />
+      </div>
+    </div>
   );
 };
 
