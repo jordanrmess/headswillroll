@@ -79,8 +79,8 @@ const App = () => {
         <img
           src={
             lightSwitch
-              ? "/switches/on _switch_transparent.png"
-              : "switches/off_switch_transparent.png"
+              ? "/switches/on_switch_transparent.svg"
+              : "/switches/off_switch_transparent.svg"
           }
           className="w-24 h-24 cursor-pointer"
           onClick={() => flipLightSwitch(!lightSwitch)}
