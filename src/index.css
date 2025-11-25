@@ -1,6 +1,6 @@
 @import "tailwindcss";
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Times New Roman', Times, serif, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -10,6 +10,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-family: 'Times New Roman', sans-serif;
 }
 
 a {
@@ -51,8 +55,4 @@ button {
     background-color: #ffffff;
   }
  
-
-  button {
-    background-color: white;
-  }
 }
