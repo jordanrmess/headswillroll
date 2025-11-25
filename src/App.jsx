@@ -69,10 +69,12 @@ const App = () => {
           }`}
         />
         <button
+          className={`bg-transparent absolute bottom-4 px-4 py-2 rounded focus:outline-none ${
+            lightSwitch ? "bg-transparent text-black" : "bg-black! text-white"
+          }`}
           onClick={() => setGlassesMode(!glassesMode)}
-          className="absolute bottom-4 px-4 py-2 text-black focus:outline-none"
         >
-          toggle glasses {glassesMode ? "off" : "on"}
+          toggles glasses
         </button>
       </div>
       <div className="absolute top-0 left-0 p-8">
