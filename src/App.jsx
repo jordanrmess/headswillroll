@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const App = () => {
   const [imageSrc, setImageSrc] = useState("glasses_mode/c.png");
-  const [timeoutId, setTimeoutId] = useState(null);
+  const resetTimeoutRef = useRef(null);
   const [glassesMode, setGlassesMode] = useState(true);
   const [lightSwitch, flipLightSwitch] = useState(true);
 
+  // Switch asset set immediately; clear pending "return to center" timer
+  useEffect(() => {
+    const folder = glassesMode ? "glasses_mode" : "heads";
+    setImageSrc(`${folder}/c.png`);
+    if (resetTimeoutRef.current) {
+      clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
+  }, [glassesMode]);
+
   useEffect(() => {
     const handleMouseMove = (event) => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
       }
 
       const viewportCenterX = window.innerWidth / 2;
@@ -41,18 +51,22 @@ const App = () => {
         setImageSrc(`${folder}/ur.png`);
       }
 
-      const id = setTimeout(() => {
+      resetTimeoutRef.current = setTimeout(() => {
         setImageSrc(`${folder}/c.png`);
-      }, 2000); // 2000ms delay
-      setTimeoutId(id);
+        resetTimeoutRef.current = null;
+      }, 2000);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+        resetTimeoutRef.current = null;
+      }
     };
-  }, [glassesMode, timeoutId]);
+  }, [glassesMode]);
 
   return (
     <div
@@ -68,14 +82,36 @@ const App = () => {
             lightSwitch ? "" : "invisible"
           }`}
         />
-        <button
-          className={`bg-transparent absolute bottom-4 px-4 py-2 rounded focus:outline-none ${
-            lightSwitch ? "bg-transparent text-black" : "bg-black! text-white"
-          }`}
-          onClick={() => setGlassesMode(!glassesMode)}
+        <div
+          className="absolute top-4 left-1/2 z-10 flex max-w-[min(100%-2rem,24rem)] -translate-x-1/2 flex-col items-center gap-2 px-2 sm:top-6 sm:flex-row sm:gap-4"
+          role="group"
+          aria-labelledby="glasses-toggle-label"
         >
-          toggles glasses
-        </button>
+          <span
+            id="glasses-toggle-label"
+            className={`shrink-0 text-center text-sm font-medium leading-tight sm:text-base ${
+              lightSwitch ? "text-slate-800" : "text-slate-200"
+            }`}
+          >
+            toggle glasses
+          </span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={glassesMode}
+            aria-labelledby="glasses-toggle-label"
+            className={`relative h-7 w-12 shrink-0 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 ${
+              glassesMode ? "bg-emerald-500" : "bg-slate-300"
+            } ${lightSwitch ? "focus:ring-offset-white" : "focus:ring-offset-black"}`}
+            onClick={() => setGlassesMode(!glassesMode)}
+          >
+            <span
+              className={`pointer-events-none absolute top-1 left-1 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ease-in-out ${
+                glassesMode ? "translate-x-5" : "translate-x-0"
+              }`}
+            />
+          </button>
+        </div>
       </div>
       <div className="absolute top-0 left-0 p-8">
         <img
