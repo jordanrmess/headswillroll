@@ -1,6 +1,14 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "ABC Connect";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/ABCConnect-Flat-Trial.woff") format("woff2")}
+
 :root {
-  font-family: 'Times New Roman', Times, serif, sans-serif;
+  font-family: "ABC Connect", ui-sans-serif, system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
