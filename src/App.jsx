@@ -97,7 +97,7 @@ const App = () => {
           lightsOn={lightSwitch}
         />
       </div>
-      <div className="absolute top-0 left-0 p-8">
+      <div className="absolute top-0 left-0 z-10 p-8">
         <img
           src={
             lightSwitch
@@ -120,6 +120,12 @@ const App = () => {
           jordanrmess@gmail.com
         </a>
       </p>
+      <div
+        className={`pointer-events-none fixed inset-0 z-50 backdrop-blur-[2px] transition-opacity duration-300 ${
+          glassesMode ? "opacity-0" : "opacity-100"
+        }`}
+        aria-hidden="true"
+      />
     </div>
   );
 };
