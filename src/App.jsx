@@ -104,7 +104,7 @@ const App = () => {
               ? publicUrl("switches/on_switch_transparent.svg")
               : publicUrl("switches/off_switch_transparent.svg")
           }
-          className="w-24 h-24 cursor-pointer"
+          className="w-20 h-20 cursor-pointer"
           onClick={() => flipLightSwitch(!lightSwitch)}
         />
       </div>
