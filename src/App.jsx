@@ -4,12 +4,16 @@ import HeadDisplay from "./HeadDisplay";
 import TopTitle from "./TopTitle";
 import LightSwitchButton from "./LightSwitchButton";
 import ContactLink from "./ContactLink";
+import { PlayProvider, CanToggleElement } from "@playhtml/react";
+
 
 const App = () => {
   const [glassesMode, setGlassesMode] = useState(true);
   const [lightSwitch, flipLightSwitch] = useState(true);
 
   return (
+    <PlayProvider initOptions={{ cursors: { enabled: true } }}>
+
     <div
       className={`relative h-screen w-screen ${
         lightSwitch ? "bg-white" : "bg-black"
@@ -40,6 +44,8 @@ const App = () => {
         aria-hidden="true"
       />
     </div>
+        </PlayProvider>
+
   );
 };
 

@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@playhtml/react": "^2.0.1",
     "@tailwindcss/vite": "^4.1.16",
     "p5": "^2.2.2",
+    "playhtml": "^2.13.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
