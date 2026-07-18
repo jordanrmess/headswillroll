@@ -5,17 +5,19 @@ const GlassesToggle = ({ checked, onChange, lightsOn }) => {
 
   return (
     <div
-      className="flex max-w-[min(100%-2rem,24rem)] flex-col items-center gap-2 px-2 sm:flex-row sm:gap-4"
+      className="flex max-w-[min(100%-2rem,24rem)] flex-row flex-wrap items-center gap-2 px-2"
       role="group"
       aria-labelledby={labelId}
     >
       <span
         id={labelId}
+        style={{ fontFamily: '"Datatype", sans-serif' }}
         className={`shrink-0 text-center text-sm font-medium leading-tight sm:text-base ${
           lightsOn ? "text-slate-800" : "text-slate-200"
         }`}
       >
-TOGGLE GLASSES      </span>
+        TOGGLE GLASSES
+      </span>
       <button
         type="button"
         role="switch"
