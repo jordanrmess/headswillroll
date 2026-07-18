@@ -5,9 +5,8 @@ const HEAD_DIRECTIONS = ["c", "cr", "dr", "dc", "dl", "cl", "ul", "uc", "ur"];
 
 const HeadDisplay = ({ glassesMode, lightsOn }) => {
   const buildHeadPath = (direction) => {
-    const folder = glassesMode ? "glasses_mode" : "heads";
     const suffix = !lightsOn ? "i" : "";
-    return publicUrl(`${folder}/${direction}${suffix}.png`);
+    return publicUrl(`heads/svg/${direction}${suffix}.svg`);
   };
 
   const [direction, setDirection] = useState("c");
@@ -20,17 +19,7 @@ const HeadDisplay = ({ glassesMode, lightsOn }) => {
       ["", "i"].forEach((suffix) => {
         cachedImages.push(
           Object.assign(new Image(), {
-            src: publicUrl(`heads/${dir}${suffix}.png`),
-          }),
-        );
-      });
-    });
-
-    HEAD_DIRECTIONS.forEach((dir) => {
-      ["", "i"].forEach((suffix) => {
-        cachedImages.push(
-          Object.assign(new Image(), {
-            src: publicUrl(`glasses_mode/${dir}${suffix}.png`),
+            src: publicUrl(`heads/svg/${dir}${suffix}.svg`),
           }),
         );
       });
