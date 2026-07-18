@@ -15,9 +15,9 @@ const App = () => {
         lightSwitch ? "bg-white" : "bg-black"
       }`}
     >
-      <TopTitle lightsOn={lightSwitch} />
 
       <div className="flex min-h-full flex-col items-center justify-center gap-6">
+          <TopTitle lightsOn={lightSwitch} />
         <HeadDisplay glassesMode={glassesMode} lightsOn={lightSwitch} />
         <GlassesToggle
           checked={glassesMode}
