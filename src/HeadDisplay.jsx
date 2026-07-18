@@ -1,26 +1,45 @@
 import React, { useState, useEffect, useRef } from "react";
 import publicUrl from "./utils/publicUrl";
 
+const HEAD_DIRECTIONS = ["c", "cr", "dr", "dc", "dl", "cl", "ul", "uc", "ur"];
+
 const HeadDisplay = ({ glassesMode, lightsOn }) => {
   const buildHeadPath = (direction) => {
     const folder = glassesMode ? "glasses_mode" : "heads";
-    //if lights off, use invereted photos
     const suffix = !lightsOn ? "i" : "";
     return publicUrl(`${folder}/${direction}${suffix}.png`);
   };
 
   const [direction, setDirection] = useState("c");
-  const [imageSrc, setImageSrc] = useState(() => buildHeadPath("c"));
   const resetTimeoutRef = useRef(null);
 
   useEffect(() => {
-    setImageSrc(buildHeadPath(direction));
+    const cachedImages = [];
 
-    if (resetTimeoutRef.current) {
-      clearTimeout(resetTimeoutRef.current);
-      resetTimeoutRef.current = null;
-    }
-  }, [glassesMode, lightsOn, direction]);
+    HEAD_DIRECTIONS.forEach((dir) => {
+      ["", "i"].forEach((suffix) => {
+        cachedImages.push(
+          Object.assign(new Image(), {
+            src: publicUrl(`heads/${dir}${suffix}.png`),
+          }),
+        );
+      });
+    });
+
+    HEAD_DIRECTIONS.forEach((dir) => {
+      ["", "i"].forEach((suffix) => {
+        cachedImages.push(
+          Object.assign(new Image(), {
+            src: publicUrl(`glasses_mode/${dir}${suffix}.png`),
+          }),
+        );
+      });
+    });
+
+    return () => {
+      cachedImages.length = 0;
+    };
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -48,11 +67,10 @@ const HeadDisplay = ({ glassesMode, lightsOn }) => {
 
       if (nextDirection) {
         setDirection(nextDirection);
-        setImageSrc(buildHeadPath(nextDirection));
       }
 
       resetTimeoutRef.current = setTimeout(() => {
-        setImageSrc(buildHeadPath(direction));
+        setDirection("c");
         resetTimeoutRef.current = null;
       }, 2000);
     };
@@ -66,10 +84,14 @@ const HeadDisplay = ({ glassesMode, lightsOn }) => {
         resetTimeoutRef.current = null;
       }
     };
-  }, [glassesMode, lightsOn]);
+  }, []);
 
   return (
-    <img src={imageSrc} alt="Direction" className="w-36 h-36 object-contain" />
+    <img
+      src={buildHeadPath(direction)}
+      alt="Direction"
+      className="w-36 h-36 object-contain"
+    />
   );
 };
 
