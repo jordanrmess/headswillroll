@@ -31,7 +31,7 @@ const App = () => {
 
         <LightSwitchButton
           lightsOn={lightSwitch}
-          onToggle={() => flipLightSwitch(!lightSwitch)}
+          onToggle={() => flipLightSwitch((prev) => !prev)}
         />
         <Envelope
           envelopeOpen={envelopeOpen}

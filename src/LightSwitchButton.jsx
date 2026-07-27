@@ -2,7 +2,7 @@ import React from "react";
 import publicUrl from "./utils/publicUrl";
 
 const LightSwitchButton = ({ lightsOn, onToggle }) => (
-  <div className="absolute top-0 left-0 z-10 p-8">
+  <div className="absolute top-0 left-0 z-30 p-8">
     <img
       src={publicUrl(
         lightsOn
