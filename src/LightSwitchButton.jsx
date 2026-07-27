@@ -9,7 +9,7 @@ const LightSwitchButton = ({ lightsOn, onToggle }) => (
           ? "switches/on_switch_transparent.svg"
           : "switches/off_switch_transparent.svg",
       )}
-      className="w-35 h-35 cursor-pointer"
+      className="w-35 h-35 cursor-pointer transition-transform duration-300 hover:scale-110"
       onClick={onToggle}
       alt="Toggle lights"
       draggable={false}

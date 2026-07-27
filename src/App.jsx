@@ -35,6 +35,7 @@ const App = () => {
         />
         <Envelope
           envelopeOpen={envelopeOpen}
+          lightsOn={lightSwitch}
           onToggle={() => setEnvelopeOpen((prev) => !prev)}
         />
         <div

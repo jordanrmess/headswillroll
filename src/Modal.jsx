@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function Modal({ message, onClose }) {
+export default function Modal({ message, lightsOn, onClose }) {
   //Close modal on esc key press
   useEffect(() => {
     const handleEscape = (e) => {
@@ -19,15 +19,19 @@ export default function Modal({ message, onClose }) {
       <div className="relative w-full max-w-md grid grid-cols-1 grid-rows-1 drop-shadow-xl animate-pop-in">
         <div className="col-start-1 row-start-1 w-full h-full pointer-events-none">
           <img
-            src="envelope/paper.svg"
+            src={lightsOn ? "envelope/paper.svg" : "envelope/paper_inverse.svg"}
             className="w-full h-full text-amber-50 fill-amber-50 stroke-stone-800 stroke-[3px]"
             draggable={false}
           />
         </div>
         {/* text content */}
-        <div className="col-start-1 row-start-1 flex items-center justify-center px-10 text-center text-stone-800">
+        <div className="col-start-1 row-start-1 flex items-center justify-center px-10 text-center">
           <span
-            className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+            className={`${
+              lightsOn
+                ? "text-gray-600 hover:text-blue-600"
+                : "text-gray-200 hover:text-amber-300"
+            } transition-colors duration-200`}
             style={{ fontFamily: '"Datatype", sans-serif' }}
           >
             <a href={`mailto:${message}`} className="hover:underline">
