@@ -83,6 +83,7 @@ const HeadDisplay = ({ glassesMode, lightsOn }) => {
       src={buildHeadPath(direction)}
       alt="Direction"
       className="w-36 h-36 object-contain"
+      draggable={false}
     />
   );
 };

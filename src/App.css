@@ -16,6 +16,19 @@ body {
   text-align: center;
 }
 
+#root,
+#root * {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+img,
+svg {
+  -webkit-user-drag: none;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

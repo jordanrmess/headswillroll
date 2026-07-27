@@ -21,6 +21,7 @@ export default function Modal({ message, onClose }) {
           <img
             src="envelope/paper.svg"
             className="w-full h-full text-amber-50 fill-amber-50 stroke-stone-800 stroke-[3px]"
+            draggable={false}
           />
         </div>
         {/* text content */}

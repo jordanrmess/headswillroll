@@ -12,6 +12,7 @@ const LightSwitchButton = ({ lightsOn, onToggle }) => (
       className="w-35 h-35 cursor-pointer"
       onClick={onToggle}
       alt="Toggle lights"
+      draggable={false}
     />
   </div>
 );

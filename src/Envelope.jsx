@@ -14,6 +14,7 @@ const Envelope = ({ envelopeOpen, onToggle }) => (
         }
         className="relative w-35 h-35 cursor-pointer transition-transform duration-300 hover:scale-110"
         onClick={onToggle}
+        draggable={false}
       />
     </div>
     {envelopeOpen && (
