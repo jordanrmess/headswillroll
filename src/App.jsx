@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import GlassesToggle from "./GlassesToggle";
 import Envelope from "./Envelope";
 import HeadDisplay from "./HeadDisplay";
-import TopTitle from "./TopTitle";
 import LightSwitchButton from "./LightSwitchButton";
 import ContactLink from "./ContactLink";
 import { PlayProvider, CanToggleElement } from "@playhtml/react";
@@ -20,7 +19,6 @@ const App = () => {
         }`}
       >
         <div className="flex min-h-full flex-col items-center justify-center gap-6">
-          <TopTitle lightsOn={lightSwitch} />
           <HeadDisplay glassesMode={glassesMode} lightsOn={lightSwitch} />
           <GlassesToggle
             checked={glassesMode}
