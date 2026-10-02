@@ -21,7 +21,7 @@ const App = () => {
   return (
     <PlayProvider initOptions={{ cursors: { enabled: true } }}>
       <div
-        className="relative h-screen w-screen"
+        className="fixed inset-0 overflow-hidden"
         style={{ backgroundColor: bgColor }}
       >
         <div className="flex min-h-full flex-col items-center justify-center gap-6">
