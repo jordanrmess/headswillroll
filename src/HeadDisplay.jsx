@@ -3,7 +3,7 @@ import publicUrl from "./utils/publicUrl";
 
 const HEAD_DIRECTIONS = ["c", "cr", "dr", "dc", "dl", "cl", "ul", "uc", "ur"];
 
-const HeadDisplay = ({ glassesMode, lightsOn }) => {
+const HeadDisplay = ({ glassesMode, lightsOn, onClick }) => {
   const buildHeadPath = (direction) => {
     const suffix = !lightsOn ? "i" : "";
     const folder = glassesMode ? "glasses_mode" : "heads";
@@ -82,7 +82,8 @@ const HeadDisplay = ({ glassesMode, lightsOn }) => {
     <img
       src={buildHeadPath(direction)}
       alt="Direction"
-      className="w-36 h-36 object-contain"
+      className="w-28 h-28 sm:w-36 sm:h-36 object-contain cursor-pointer"
+      onClick={onClick}
       draggable={false}
     />
   );

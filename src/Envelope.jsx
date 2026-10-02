@@ -8,7 +8,7 @@ const Envelope = ({ envelopeOpen, lightsOn, onToggle }) => {
 
   return (
     <div>
-      <div className="absolute top-0 left-0 z-10 p-4 pl-22">
+      <div className="absolute bottom-0 left-0 z-10 p-2 sm:p-4">
         <img
           src={publicUrl(
             showOpenEnvelope
@@ -19,7 +19,7 @@ const Envelope = ({ envelopeOpen, lightsOn, onToggle }) => {
                 ? "envelope/envelope_closed.svg"
                 : "envelope/envelope_closed_inverse.svg",
           )}
-          className="w-17.5 h-17.5 cursor-pointer"
+          className="w-16 h-16 sm:w-23.5 sm:h-23.5 cursor-pointer"
           onClick={onToggle}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}

@@ -10,7 +10,13 @@ const App = () => {
   const [glassesMode, setGlassesMode] = useState(true);
   const [lightSwitch, flipLightSwitch] = useState(true);
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
-  const bgColor = lightSwitch ? "rgb(255, 102, 102)" : "#000000";
+  const [litBgColor, setLitBgColor] = useState("rgb(255, 102, 102)");
+  const bgColor = lightSwitch ? litBgColor : "#000000";
+
+  const randomizeBgColor = () => {
+    const hue = Math.floor(Math.random() * 360);
+    setLitBgColor(`hsl(${hue}, 100%, 70%)`);
+  };
 
   return (
     <PlayProvider initOptions={{ cursors: { enabled: true } }}>
@@ -19,7 +25,11 @@ const App = () => {
         style={{ backgroundColor: bgColor }}
       >
         <div className="flex min-h-full flex-col items-center justify-center gap-6">
-          <HeadDisplay glassesMode={glassesMode} lightsOn={lightSwitch} />
+          <HeadDisplay
+            glassesMode={glassesMode}
+            lightsOn={lightSwitch}
+            onClick={randomizeBgColor}
+          />
           <GlassesToggle
             checked={glassesMode}
             onChange={setGlassesMode}
