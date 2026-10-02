@@ -10,13 +10,13 @@ const App = () => {
   const [glassesMode, setGlassesMode] = useState(true);
   const [lightSwitch, flipLightSwitch] = useState(true);
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
+  const bgColor = lightSwitch ? "rgb(255, 102, 102)" : "#000000";
 
   return (
     <PlayProvider initOptions={{ cursors: { enabled: true } }}>
       <div
-        className={`relative h-screen w-screen ${
-          lightSwitch ? "bg-white" : "bg-black"
-        }`}
+        className="relative h-screen w-screen"
+        style={{ backgroundColor: bgColor }}
       >
         <div className="flex min-h-full flex-col items-center justify-center gap-6">
           <HeadDisplay glassesMode={glassesMode} lightsOn={lightSwitch} />
