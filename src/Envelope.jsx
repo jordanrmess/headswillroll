@@ -4,11 +4,24 @@ import Modal from "./Modal";
 
 const Envelope = ({ envelopeOpen, lightsOn, onToggle }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [labelColor, setLabelColor] = useState(undefined);
   const showOpenEnvelope = envelopeOpen || isHovered;
 
   return (
     <div>
-      <div className="absolute bottom-0 left-0 z-10 p-2 sm:p-4">
+      <div className="absolute bottom-0 left-0 z-10 flex flex-col items-center p-2 sm:p-4">
+        <span
+          style={{ fontFamily: '"Datatype", sans-serif', color: labelColor }}
+          className={`text-sm font-medium leading-tight sm:text-base ${
+            lightsOn ? "text-slate-800" : "text-slate-200"
+          }`}
+          onMouseEnter={() =>
+            setLabelColor(`hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`)
+          }
+          onMouseLeave={() => setLabelColor(undefined)}
+        >
+          WORK WITH ME
+        </span>
         <img
           src={publicUrl(
             showOpenEnvelope
