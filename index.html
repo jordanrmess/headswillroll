@@ -25,6 +25,15 @@
     />
   </head>
   <body class="bg-white">
+    <script>
+      // Paint the saved background before React loads to avoid a color flash
+      try {
+        document.body.style.backgroundColor =
+          localStorage.getItem("bgColor") || "rgb(255, 102, 102)";
+      } catch (e) {
+        document.body.style.backgroundColor = "rgb(255, 102, 102)";
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

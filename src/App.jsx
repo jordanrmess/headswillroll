@@ -6,16 +6,31 @@ import LightSwitchButton from "./LightSwitchButton";
 import ContactLink from "./ContactLink";
 import { PlayProvider, CanToggleElement } from "@playhtml/react";
 
+const BG_COLOR_KEY = "bgColor";
+const DEFAULT_BG_COLOR = "rgb(255, 102, 102)";
+
 const App = () => {
   const [glassesMode, setGlassesMode] = useState(true);
   const [lightSwitch, flipLightSwitch] = useState(true);
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
-  const [litBgColor, setLitBgColor] = useState("rgb(255, 102, 102)");
+  const [litBgColor, setLitBgColor] = useState(() => {
+    try {
+      return localStorage.getItem(BG_COLOR_KEY) || DEFAULT_BG_COLOR;
+    } catch {
+      return DEFAULT_BG_COLOR;
+    }
+  });
   const bgColor = lightSwitch ? litBgColor : "#000000";
 
   const randomizeBgColor = () => {
     const hue = Math.floor(Math.random() * 360);
-    setLitBgColor(`hsl(${hue}, 100%, 70%)`);
+    const color = `hsl(${hue}, 100%, 70%)`;
+    setLitBgColor(color);
+    try {
+      localStorage.setItem(BG_COLOR_KEY, color);
+    } catch {
+      // ignore storage failures
+    }
   };
 
   return (
